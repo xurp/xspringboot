@@ -1,6 +1,6 @@
 # Tomcat
 server:
-    port: 8080
+    port: 8077
 
 spring:
     # 环境 dev|test|pro
@@ -13,7 +13,6 @@ spring:
     redis:
         host: localhost
         port: 6379
-        password:       # 密码（默认为空）
     servlet:
         multipart:
             maxFileSize: 104857600 #100MB

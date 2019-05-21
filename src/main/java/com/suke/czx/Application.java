@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @SpringBootApplication
 public class Application {
-
+//localhost:8077
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 		log.info("==================X-SpringBoot启动成功================");
