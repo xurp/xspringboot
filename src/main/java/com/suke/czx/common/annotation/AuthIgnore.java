@@ -8,6 +8,7 @@ import java.lang.annotation.*;
  * @email yzcheng90@qq.com
  * @date 2017-03-23 15:44
  */
+//[注]:注解在方法,注解将被包含在javadoc中
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2017年3月8日 下午12:57:02
  */
 public class IPUtils {
+	//[注]:这里似乎在类上注释@Slf4j就行了
 	private static Logger logger = LoggerFactory.getLogger(IPUtils.class);
 
 	/**

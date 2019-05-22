@@ -1,0 +1,21 @@
+一:配置
+1. pom里加了minio，hutool，oss相关（阿里和七牛），docker-maven-plugin（应该是mvn时自动build，不用docker build），aliyun nexus
+2. Dockerfile：expose是申明容器开什么端口，其实没开，还是要用-p指定，或者用-P随机（随即时候会制定成expose的端口）。用了add和touch（创建文件），其实用copy好
+3. 修改了docker-compose的端口和配置文件，这个文件就是起到docker start的容器编排作用
+4. logback-spring.xml里，根据不同的环境配置了不同的日志级别
+5. generator.propertie是在common.utils.GenUtils用的,这个类是一个代码生成器   工具类
+6. application进行了profiles和mybaits-plus的配置,然后再dev,pro和test里配置不同的mysql.com.zaxxer.hikari.HikariDataSource是默认的数据源,也可以用druid
+7. resource.template下的vm文件都是自动生成代码用的,见https://www.cnblogs.com/woshixiangshang/p/8818198.html
+
+二:后台
+1. authentication包(以及config包里的ShiroConfig)是做shiro和JWT认证的.数据库里的sys_user_token(id,token,expire_time,update_time)是配套的.
+   ShiroConfig主要定义了不需要权限的路径;OAuth2Filter是做权限过滤的规则;OAuth2Realm是设置角色、权限和认证信息;TokenGenerator是生成token
+2. aspect里用AOP截取加了注解SysLog的地方,进行简单日志处理
+3. base里抽象类,如从shiro获取User
+4. exception里的Handler不仅截取自定义的异常类(要自己抛),还截取了DuplicateKeyException,AuthorizationException和Exception(也可以只截取Exception,然后分instanceof处理)
+5. utils包,其中IPUtils可以在nginx代理下获取真实IP, R就是seckill的result包里的Result(用来返回给前台), seckill还多了个CodeMsg, 封装错误码和desc, Result会解析,
+        这样可以用Result.error(CodeMsg.SESSION_ERROR)返回, 而R是继承了HashMap,以键值对方式返回,这样值也用k-v返回, 而Result里专门搞了个T data,在success时给data赋值.
+   SpringContextUtils实现了ApplicationContextAware,这是专门在不归spring管的类(比如oss.cloud.OSSFactory类上没有spring注解)获取bean(service)的,
+        如SpringContextUtils.getBean("sysConfigService").
+
+三:前台

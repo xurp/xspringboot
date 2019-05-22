@@ -3,6 +3,9 @@ package com.suke.czx.modules.oss.cloud;
 import com.suke.czx.common.utils.Constant;
 import com.suke.czx.common.utils.SpringContextUtils;
 import com.suke.czx.modules.sys.service.SysConfigService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.suke.czx.common.utils.ConfigConstant;
 
 /**
@@ -15,6 +18,7 @@ public final class OSSFactory {
     private static SysConfigService sysConfigService;
 
     static {
+    	//[注]:本类不归spring管,所以可能要用SpringContextUtils获取spring里的bean(service)了
         OSSFactory.sysConfigService = (SysConfigService) SpringContextUtils.getBean("sysConfigService");
     }
 

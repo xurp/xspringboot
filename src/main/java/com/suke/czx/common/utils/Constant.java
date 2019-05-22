@@ -19,11 +19,8 @@ public class Constant {
 
 	/**
 	 * 菜单类型
-	 * 
-	 * @author czx
-	 * @email object_czx@163.com
-	 * @date 2016年11月15日 下午1:24:29
 	 */
+	//[注]:enum写法,除了"值"还可以有变量
     public enum MenuType {
         /**
          * 目录

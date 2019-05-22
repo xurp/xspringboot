@@ -18,9 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 public abstract class AbstractController {
+	//[注]:用作mybatisPlus的Page和hashmap的转换
 	@Autowired
 	protected MPPageConvert mpPageConvert;
 
+	//[注]:用shiro获取user
 	protected SysUser getUser() {
 		return (SysUser) SecurityUtils.getSubject().getPrincipal();
 	}

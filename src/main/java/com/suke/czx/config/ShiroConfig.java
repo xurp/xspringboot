@@ -44,7 +44,7 @@ public class ShiroConfig {
 
         return securityManager;
     }
-
+    //[注]:这里主要是配置不需要权限的路径,比如/sys/login肯定不要
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();

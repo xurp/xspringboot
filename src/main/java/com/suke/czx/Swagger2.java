@@ -29,6 +29,7 @@ public class Swagger2 {
                 //控制暴露出去的路径下的实例
                 //如果某个接口不想暴露,可以使用以下注解
                 //这样,该接口就不会暴露在 swagger2 的页面下
+                //[注]:这里应该是定义了需要在swagger里显示的路径,api项目就是这样的
                 .apis(RequestHandlerSelectors.basePackage("com.suke.czx.modules.app"))
                 .paths(PathSelectors.any())
                 .build();

@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+//slf4j和swagger的注解
 @Slf4j
 @EnableSwagger2
 @SpringBootApplication

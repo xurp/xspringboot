@@ -33,6 +33,7 @@ public class SysLogAspect {
 	@Autowired
 	private SysLogService sysLogService;
 	
+	//[注]:这里可以写...controller,也可以写加了注解的就要走AOP
 	@Pointcut("@annotation(com.suke.czx.common.annotation.SysLog)")
 	public void logPointCut() { 
 		
@@ -59,7 +60,7 @@ public class SysLogAspect {
 		SysLog sysLog = new SysLog();
 		com.suke.czx.common.annotation.SysLog syslog = method.getAnnotation(com.suke.czx.common.annotation.SysLog.class);
 		if(syslog != null){
-			//注解上的描述
+			//[注]:annotation.SysLog.value()=SysLog.Operation=注解上的描述
 			sysLog.setOperation(syslog.value());
 		}
 

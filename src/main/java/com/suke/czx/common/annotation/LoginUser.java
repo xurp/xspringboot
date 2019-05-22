@@ -12,6 +12,7 @@ import java.lang.annotation.Target;
  * @email object_czx@163.com
  * @date 2017-03-23 20:39
  */
+//[注]:注解在方法参数
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LoginUser {
