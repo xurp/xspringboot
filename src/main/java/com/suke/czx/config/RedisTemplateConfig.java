@@ -13,6 +13,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 /**
  * RedisTemplate  配置
  */
+// [注]:第三个注解:如果配置了redis的相关配置信息那么就实例化本类?供操作，如果没有配置redis的相关配置那么就不实例化
 @EnableCaching
 @Configuration
 @ConditionalOnBean(RedisConnectionFactory.class)

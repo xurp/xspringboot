@@ -12,10 +12,20 @@
    ShiroConfig主要定义了不需要权限的路径;OAuth2Filter是做权限过滤的规则;OAuth2Realm是设置角色、权限和认证信息;TokenGenerator是生成token
 2. aspect里用AOP截取加了注解SysLog的地方,进行简单日志处理
 3. base里抽象类,如从shiro获取User
-4. exception里的Handler不仅截取自定义的异常类(要自己抛),还截取了DuplicateKeyException,AuthorizationException和Exception(也可以只截取Exception,然后分instanceof处理)
+4. exception里的Handler不仅截取自定义的异常类(要自己抛),还截取了DuplicateKeyException,AuthorizationException和Exception(也可以只截取Exception,然后分instanceof处理).自定义了RRexception
 5. utils包,其中IPUtils可以在nginx代理下获取真实IP, R就是seckill的result包里的Result(用来返回给前台), seckill还多了个CodeMsg, 封装错误码和desc, Result会解析,
         这样可以用Result.error(CodeMsg.SESSION_ERROR)返回, 而R是继承了HashMap,以键值对方式返回,这样值也用k-v返回, 而Result里专门搞了个T data,在success时给data赋值.
    SpringContextUtils实现了ApplicationContextAware,这是专门在不归spring管的类(比如oss.cloud.OSSFactory类上没有spring注解)获取bean(service)的,
         如SpringContextUtils.getBean("sysConfigService").
+6. validator和validator.group包，是比较特殊的校验方法。validateEntity封装了hibernate的Validate,参数是校验的对象和组.Assert里写了简单的验证方法如isBlank,抛RRexception.然后有几个空接口类,
+   addGroup,updateGroup,AliyunGroup等,接口Group配置了@GroupSequence定义校验顺序，如果AddGroup组失败，则UpdateGroup组不会再校验.
+7. xss包封装了一些注入或xss过滤的工具类,其中XssFilter是Filter的
+8. config包,FilterConfig注解了@Configuration,用FilterRegistrationBean注册了XssFilter和shiroFilter(在ShiroConfig下边的bean).KaptchaConfig是调用验证码的配置.
+   MyBatisPlusConfig是配置自己开发的分页插件.RedisTemplateConfig是配置redisTemplate.shiroConfig主要配置要权限过滤的路径.WebMvcConfig负责注册interceptor,并加了跨域支持.
+9. interceptor包,AuthorizationInterceptor主要做shiro+JWT的权限认证,LoginUserHandlerMethodArgumentResolver是测试自定义解析器的注入.
+10 apkversion相关: APK应该是安卓的一种东西(APP).ApkVersionService借口用了IService(封装的mybatis),其实现类继承了ServiceImpl用处一样,ApkVersionMapper继承了BaseMapper作用也一样
+   (应该是配合resource里的ApkVersionmapper.xml的).ApkVersion是实体类,类似APP的版本信息.ApkVersionController是简单的增删查改.
+11 app.controller的TestController测试了@LoginUser和@AuthIgnore两个注解,似乎这两个注解都没实际应用到
+12 gen相关:用作代码生成,
 
 三:前台

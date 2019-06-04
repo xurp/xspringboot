@@ -2,6 +2,8 @@ package com.suke.czx.common.validator;
 
 import com.suke.czx.common.exception.RRException;
 
+
+import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -31,6 +33,7 @@ public class ValidatorUtils {
      */
     public static void validateEntity(Object object, Class<?>... groups)
             throws RRException {
+    	// [注]:seckill项目是通过自定义一个注解类,再加一个实现ConstraintValidator<IsMobile, String>的类来做validate的
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, groups);
         if (!constraintViolations.isEmpty()) {
             StringBuilder msg = new StringBuilder();

@@ -59,8 +59,9 @@ public class ShiroConfig {
         shiroFilter.setFilters(filters);
 
         Map<String, String> filterMap = new LinkedHashMap<>();
+        // [注]:anon代表可以匿名访问
         filterMap.put("/actuator/**", "anon");
-        filterMap.put("/app/**", "anon");  //APP 模块开放 后面通过拦截器管理
+        filterMap.put("/app/**", "anon");  //APP 模块开放      [注]:后面通过拦截器管理:AuthorizationInterceptor
         filterMap.put("/sys/login", "anon"); //用户密码登录
         filterMap.put("/sys/unauthorized", "anon"); //未认证
         filterMap.put("/sys/code/**", "anon"); //验证码

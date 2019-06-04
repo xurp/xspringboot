@@ -17,6 +17,7 @@ import java.util.Date;
  * @email object_czx@163.com
  * @date 2019-04-28 15:56:33
  */
+// [注]:@EqualsAndHashCode是可以参考的注解
 @Data
 @Builder
 @TableName("tb_apk_version")

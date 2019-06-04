@@ -10,6 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @SpringBootApplication
 public class Application {
+//启动nginx,启动redis,输入localhost,admin/admin
 //localhost:8077
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

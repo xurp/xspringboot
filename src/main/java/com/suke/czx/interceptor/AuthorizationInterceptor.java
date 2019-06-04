@@ -38,7 +38,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         }else{
             return true;
         }
-
+    	// [注]:如果加了AuthIgnore的注解,那么返回true,即拦截放行
         if(annotation != null){
             return true;
         }

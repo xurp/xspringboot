@@ -45,6 +45,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      * 跨域支持
      * @param registry
      */
+    // [注]:后端接口的跨域支持
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")

@@ -33,12 +33,17 @@ public class ApkVersionController  extends AbstractController {
     /**
      * 列表
      */
+    // [注]:这里的@RequiresPermissions是限制权限,apkversion:apkversion:list在sysMenu里,数据库里的sys_menu的APK版本管理的下属查看的perms就是这个
+    // [注]:但这里的@RequestParam Map<String, Object> params是什么存疑,主要和前端有关,本项目前端似乎用了vm之类的东西(是不是和mybatisplus配合的)
     @RequestMapping("/list")
     @RequiresPermissions("apkversion:apkversion:list")
     public R list(@RequestParam Map<String, Object> params){
         //查询列表数据
+    	// [注]:QueryWrapper是封装过的mybatis
         QueryWrapper<ApkVersion> queryWrapper = new QueryWrapper<>();
+        // [注]:mpPageConvert在AbstractController里,是mybatisPlus的Page和hashmap的转换
         IPage<ApkVersion> sysConfigList = apkVersionService.page(mpPageConvert.<ApkVersion>pageParamConvert(params),queryWrapper);
+        // [注]:返回ok,并把page放到页面上
         return R.ok().put("page", mpPageConvert.pageValueConvert(sysConfigList));
     }
 

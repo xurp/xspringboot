@@ -22,11 +22,12 @@ public class FilterConfig {
     @Bean
     public FilterRegistrationBean shiroFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
-        //[注]:这里注册的是shiroConfig里定义不需要权限的路径的方法
+        // [注]:这里注册的是shiroConfig里定义不需要权限的路径的方法
         registration.setFilter(new DelegatingFilterProxy("shiroFilter"));
         //该值缺省为false，表示生命周期由SpringApplicationContext管理，设置为true则表示由ServletContainer管理
         registration.addInitParameter("targetFilterLifecycle", "true");
         registration.setEnabled(true);
+        // [注]:FilterRegistrationBean的order越小越先执行,这里先shiro再xss
         registration.setOrder(Integer.MAX_VALUE - 1);
         registration.addUrlPatterns("/*");
         return registration;
