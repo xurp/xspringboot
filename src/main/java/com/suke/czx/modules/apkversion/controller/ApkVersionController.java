@@ -34,7 +34,7 @@ public class ApkVersionController  extends AbstractController {
      * 列表
      */
     // [注]:这里的@RequiresPermissions是限制权限,apkversion:apkversion:list在sysMenu里,数据库里的sys_menu的APK版本管理的下属查看的perms就是这个
-    // [注]:但这里的@RequestParam Map<String, Object> params是什么存疑,主要和前端有关,本项目前端似乎用了vm之类的东西(是不是和mybatisplus配合的)
+    // [注]:但这里的@RequestParam Map<String, Object> params是什么存疑,主要和前端有关,可能和modules.sys里的东西有关
     @RequestMapping("/list")
     @RequiresPermissions("apkversion:apkversion:list")
     public R list(@RequestParam Map<String, Object> params){

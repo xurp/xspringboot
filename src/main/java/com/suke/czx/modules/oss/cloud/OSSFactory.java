@@ -23,8 +23,9 @@ public final class OSSFactory {
     }
 
     public static CloudStorageService build(){
-        //获取云存储配置信息
+        // [注]:从sys_config表里获取CLOUD_STORAGE_CONFIG_KEY的config value(json):获取云存储配置信息
         CloudStorageConfig config = sysConfigService.getConfigObject(ConfigConstant.CLOUD_STORAGE_CONFIG_KEY, CloudStorageConfig.class);
+        // [注]:根据type(1)选择storageService
 
         if(config.getType() == Constant.CloudService.QINIU.getValue()){
             return new QiniuCloudStorageService(config);

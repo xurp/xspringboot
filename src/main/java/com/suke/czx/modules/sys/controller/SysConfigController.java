@@ -66,6 +66,7 @@ public class SysConfigController extends AbstractController {
 	@RequestMapping("/save")
 	@RequiresPermissions("sys:config:save")
 	public R save(@RequestBody SysConfig config){
+		// [注]:先验证再保存
 		ValidatorUtils.validateEntity(config);
 
 		sysConfigService.save(config);
@@ -94,6 +95,7 @@ public class SysConfigController extends AbstractController {
 	@RequestMapping("/delete")
 	@RequiresPermissions("sys:config:delete")
 	public R delete(@RequestBody Long[] ids){
+		// [注]:这里的Serializable是因为mybatisplus的removeById封装的参数必须是Serializable的
 		sysConfigService.removeById((Serializable)Arrays.asList(ids));
 		return R.ok();
 	}

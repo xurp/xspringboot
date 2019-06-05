@@ -25,6 +25,7 @@ public class ShiroServiceImpl implements ShiroService {
     private final SysMenuService sysMenuService;
     private final SysUserMapper sysUserMapper;
     private final SysUserTokenMapper sysUserTokenMapper;
+    //获取用户权限列表
 
     @Override
     public Set<String> getUserPermissions(long userId) {
@@ -58,6 +59,7 @@ public class ShiroServiceImpl implements ShiroService {
         return sysUserTokenMapper.selectOne(queryWrapper);
     }
 
+    //根据用户ID，查询用户
     @Override
     public SysUser queryUser(Long userId) {
         return sysUserMapper.selectById(userId);

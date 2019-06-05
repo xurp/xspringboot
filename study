@@ -26,6 +26,11 @@
 10 apkversion相关: APK应该是安卓的一种东西(APP).ApkVersionService借口用了IService(封装的mybatis),其实现类继承了ServiceImpl用处一样,ApkVersionMapper继承了BaseMapper作用也一样
    (应该是配合resource里的ApkVersionmapper.xml的).ApkVersion是实体类,类似APP的版本信息.ApkVersionController是简单的增删查改.
 11 app.controller的TestController测试了@LoginUser和@AuthIgnore两个注解,似乎这两个注解都没实际应用到
-12 gen相关:用作代码生成,
+12 gen相关:用作代码生成,似乎是写新建模块的?配合GenUtils和resources里面的vm,暂时不看,也可参考"一:配置"里的7
+13 oss相关:和apkversion相关一样,似乎这里的service结合了mybatisplus之后,都是当repository来用了.SysOss实体存文件上传url,如http://oss.sukeintel.com/upload/20190401/e0a49.png
+   CloudStorageService是抽象类,CloudStorageConfig是sys_config表里的CLOUD_STORAGE_CONFIG_KEY对应的json的value,以实体类的方式配置云的参数.
+   OSSFactory根据目前数据库里的配置返回四个实际的cloudStorageService里相应的实例.四个实现了CloudStorageService的类调用自己类库的方法做上传操作.
+14 ShiroService相关:一些关于user的工具类,和Shiro库不直接相关
+15 config相关:简单的CRUD,针对config表
 
 三:前台

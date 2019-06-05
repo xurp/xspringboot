@@ -67,6 +67,7 @@ public class SysOssController extends AbstractController {
 	public R list(@RequestParam Map<String, Object> params){
 		//查询列表数据
 		QueryWrapper<SysOss> queryWrapper = new QueryWrapper<>();
+		// [注]:MapUtil是hutool(一个java工具包).如果key有值(实际没有),那么在查询中加一个like(封装好的)
 		if(MapUtil.getStr(params,"key") != null){
 			queryWrapper
 					.like("remark",MapUtil.getStr(params,"key"));
@@ -84,6 +85,7 @@ public class SysOssController extends AbstractController {
     @RequestMapping("/config")
     @RequiresPermissions("sys:oss:all")
     public R config(){
+    	// [注]:在sys_config表里,CloudStorageConfig按json存的.现在用这个方法把json转成实体类返回
         CloudStorageConfig config = sysConfigService.getConfigObject(KEY, CloudStorageConfig.class);
 
         return R.ok().put("config", config);
@@ -98,7 +100,7 @@ public class SysOssController extends AbstractController {
 	public R saveConfig(@RequestBody CloudStorageConfig config){
 
 		if(config.getType() == Constant.CloudService.QINIU.getValue()){
-			//校验七牛数据
+			//校验七牛数据 [注]:参考CloudStorageConfig
 			ValidatorUtils.validateEntity(config, QiniuGroup.class);
 		}else if(config.getType() == Constant.CloudService.ALIYUN.getValue()){
 			//校验阿里云数据

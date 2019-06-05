@@ -17,6 +17,8 @@ import java.io.Serializable;
 @Data
 public class CloudStorageConfig implements Serializable {
     private static final long serialVersionUID = 1L;
+    // [注]因为已经定义了校验的group,而且ValidatorUtils里写了validateEntity(Object object, Class<?>... groups)
+    // 所以应该按这种方式注解:@NotBlank(message = "用户名不能为空", groups = {AddGroup.class, UpdateGroup.class})
 
     //类型 1：七牛  2：阿里云  3：腾讯云 4：minio
     @Range(min=1, max=4, message = "类型错误")
