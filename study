@@ -31,6 +31,9 @@
    CloudStorageService是抽象类,CloudStorageConfig是sys_config表里的CLOUD_STORAGE_CONFIG_KEY对应的json的value,以实体类的方式配置云的参数.
    OSSFactory根据目前数据库里的配置返回四个实际的cloudStorageService里相应的实例.四个实现了CloudStorageService的类调用自己类库的方法做上传操作.
 14 ShiroService相关:一些关于user的工具类,和Shiro库不直接相关
-15 config相关:简单的CRUD,针对config表
+15 config,log相关:简单的CRUD,针对config,log表
+16 LoginController:使用了google的kapcha做验证码,以及一些登陆相关的,涉及到token,资源控制等
+17 menu相关:主要是CRUD菜单,以及根据不同情况获取菜单,菜单和用户组权限的对应关系等
+18 user和role相关:CRUD
 
 三:前台

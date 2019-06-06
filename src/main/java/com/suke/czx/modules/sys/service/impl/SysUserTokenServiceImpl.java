@@ -41,6 +41,8 @@ public class SysUserTokenServiceImpl extends ServiceImpl<SysUserTokenMapper,SysU
 			tokenEntity.setExpireTime(expireTime);
 
 			//保存token
+			// [注]:本项目里有时候用baseMapper(应该是代表自己),有时候又注入了一个SysUserTokenMapper,比如下面的else里,不知道为什么,因为tokenEntity是同一个东西
+			// [注]:怀疑两者都行
 			baseMapper.insert(tokenEntity);
 		}else{
 			tokenEntity.setToken(token);

@@ -50,6 +50,7 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
 
+        // [注]:loginUrl：没有登录的用户请求需要登录的页面时自动跳转到登录页面; unauthorizedUrl：没有权限默认跳转的页面，登录的用户访问了没有被授权的资源自动跳转到的页面
         shiroFilter.setLoginUrl("/sys/unauthorized");
         shiroFilter.setUnauthorizedUrl("/sys/unauthorized");
 

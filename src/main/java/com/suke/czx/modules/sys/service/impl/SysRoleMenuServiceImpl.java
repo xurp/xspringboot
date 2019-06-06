@@ -28,6 +28,9 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper,SysRol
 
 	private final SysRoleMenuMapper sysRoleMenuMapper;
 
+	// [注]:这个肯定要加事务,但它是在另一个事务方法SysRoleServiceImpl#save里被调用的.
+	// [注]:PROPAGATION_REQUIRED支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择，也是spring默认的事务的传播。
+	// [注]:save调用saveOrUpdate,因为是默认设置,所以在一个事务里,这两个大小方法会同时提交,同时回滚
 	@Override
 	@Transactional
 	public void saveOrUpdate(Long roleId, List<Long> menuIdList) {
@@ -45,6 +48,9 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper,SysRol
 		sysRoleMenuMapper.saveUserMenu(map);
 	}
 
+	/**
+	 * 根据角色ID，获取菜单ID列表
+	 */
 	@Override
 	public List<Long> queryMenuIdList(Long roleId) {
 		return sysRoleMenuMapper.queryMenuIdList(roleId);

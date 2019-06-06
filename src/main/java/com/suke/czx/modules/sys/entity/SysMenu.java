@@ -73,6 +73,7 @@ public class SysMenu extends Model<SysMenu> implements Serializable {
 	/**
 	 * ztree属性
 	 */
+	// [注]:mybatisplus的注解,该属性不为数据库表字段，但又是必须使用的
 	@TableField(exist = false)
 	private Boolean open;
 

@@ -34,7 +34,9 @@ public class ApkVersionController  extends AbstractController {
      * 列表
      */
     // [注]:这里的@RequiresPermissions是限制权限,apkversion:apkversion:list在sysMenu里,数据库里的sys_menu的APK版本管理的下属查看的perms就是这个
-    // [注]:但这里的@RequestParam Map<String, Object> params是什么存疑,主要和前端有关,可能和modules.sys里的东西有关
+    // [注]:在OAuth2Realm的doGetAuthorizationInfo里调用了shiroService.getUserPermissions(该方法用,分割了数据库的权限列表)获取permSet,再在这里对比.这是专门和shiro配合的
+    // [注]:这里的@RequestParam Map<String, Object> params参数是{_search=false, nd=1559807513220, limit=10, page=1, sidx=, order=asc, _=1559807513152}
+    // [注]:index.js里通过getMenuList从SysMenuController#nav获得返回的R里的menuList,然后再index.html#L64遍历menuList渲染菜单
     @RequestMapping("/list")
     @RequiresPermissions("apkversion:apkversion:list")
     public R list(@RequestParam Map<String, Object> params){

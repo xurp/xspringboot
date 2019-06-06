@@ -21,6 +21,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper,SysMenu> imple
 
 	private final SysMenuMapper sysMenuMapper;
 	
+	/**
+	 * 根据父菜单，查询子菜单
+	 * @param parentId 父菜单ID
+	 * @param menuIdList  用户菜单ID,查询出的菜单必须在该参数下
+	 */
 	@Override
 	public List<SysMenu> queryListParentId(Long parentId, List<Long> menuIdList) {
 		List<SysMenu> menuList = queryListParentId(parentId);
@@ -36,7 +41,11 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper,SysMenu> imple
 		}
 		return userMenuList;
 	}
-
+	
+	/**
+	 * 根据父菜单，查询子菜单
+	 * @param parentId 父菜单ID
+	 */
 	@Override
 	public List<SysMenu> queryListParentId(Long parentId) {
 		QueryWrapper<SysMenu> queryWrapper = new QueryWrapper<>();
@@ -59,11 +68,14 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper,SysMenu> imple
 		}
 		
 		//用户菜单列表
+		// [注]:用户id和roleId对应一张表,roleId和该权限可以使用的菜单id列表对应一张表
 		List<Long> menuIdList = sysMenuMapper.queryAllMenuId(userId);
 		return getAllMenuList(menuIdList);
 	}
 
-
+	/**
+	 * 查询用户的权限列表
+	 */
 	@Override
 	public List<SysMenu> queryUserList(Long userId) {
 		return sysMenuMapper.queryUserList(userId);
@@ -85,6 +97,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper,SysMenu> imple
 	 * 递归
 	 */
 	private List<SysMenu> getMenuTreeList(List<SysMenu> menuList, List<Long> menuIdList){
+		// [注]:算法:menuIdList不用管,只是一个查询范围限制.遍历menuList,如果是目录,从数据库查询该目录下的所有菜单并set到实体类里的list域(数据库里没有),然后递归
+		// [注]:这样结束后,返回的subMenuList里,每个SysMenu都存了自己下一级的目录
 		List<SysMenu> subMenuList = new ArrayList<SysMenu>();
 		
 		for(SysMenu entity : menuList){

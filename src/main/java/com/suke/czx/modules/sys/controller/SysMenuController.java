@@ -88,6 +88,7 @@ public class SysMenuController extends AbstractController {
 	/**
 	 * 保存
 	 */
+	// [注]:在SysLogAspect的AOP里配置,加了注释的就把日志写在数据库里
 	@SysLog("保存菜单")
 	@RequestMapping("/save")
 	@RequiresPermissions("sys:menu:save")
@@ -136,6 +137,7 @@ public class SysMenuController extends AbstractController {
 	/**
 	 * 验证参数是否正确
 	 */
+	// [注]:SysMenu实体里没有验证注释,因为这里的验证设计一些逻辑方面的,就直接手动写了
 	private void verifyForm(SysMenu menu){
 		if(StringUtils.isBlank(menu.getName())){
 			throw new RRException("菜单名称不能为空");

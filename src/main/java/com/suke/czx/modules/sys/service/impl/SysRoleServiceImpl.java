@@ -58,7 +58,9 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper,SysRole> imple
 		//更新角色与菜单关系
 		sysRoleMenuService.saveOrUpdate(role.getRoleId(), role.getMenuIdList());
 	}
-
+	/**
+	 * 查询用户创建的角色ID列表,比如是管理员1创建的
+	 */
 	@Override
 	public List<Long> queryRoleIdList(Long createUserId) {
 		return sysRoleMapper.queryRoleIdList(createUserId);

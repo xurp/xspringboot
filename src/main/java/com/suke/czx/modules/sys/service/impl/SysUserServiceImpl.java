@@ -50,7 +50,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper,SysUser> imple
 	@Transactional
 	public boolean save(SysUser user) {
 		user.setCreateTime(new Date());
-		//sha256加密
+		// [注]sha256+盐加密
 		String salt = RandomStringUtils.randomAlphanumeric(20);
 		user.setPassword(new Sha256Hash(user.getPassword(), salt).toHex());
 		user.setSalt(salt);
